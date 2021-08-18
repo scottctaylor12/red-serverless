@@ -1,0 +1,19 @@
+service: red-serverless
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: python3.8
+  stage: api
+  lambdaHashingVersion: 20201221
+  environment:
+    TEAMSERVER: ${opt:teamserver}
+
+functions:
+  redirector:
+    handler: handler.redirector
+    events:
+      - http:
+          path: /{all+}
+          method: any
